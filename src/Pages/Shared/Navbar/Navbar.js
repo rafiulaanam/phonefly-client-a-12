@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../Assets/logo.png";
 import PrimaryButton from "../../../Components/Buttons/PrimaryButton";
+import { AuthContext } from "../../../Context/AuthProvider";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
- 
+ const {user}=useContext(AuthContext)
+ const [isAdmin] = useAdmin(user?.email)
   const menuItems = (
-    <>
+    <> 
       <li>
         <Link to={"/"}>Home</Link>
         <Link to={"/all-phones"}>All Phone</Link>
@@ -16,9 +19,16 @@ const Navbar = () => {
 
   const menuButton = (
     <>
-      <Link to={"/dashboard"} className="btn text-left btn-ghost mr-2">
+
+    {
+      isAdmin &&
+      <>
+        <Link to={"/admin/dashboard"} className="btn text-left btn-ghost mr-2">
         Dashboard
       </Link>
+      </>
+    }
+    
       <Link to={"/login"} className="btn text-left btn-ghost mr-2">
         Login
       </Link>

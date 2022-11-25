@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../Assets/logo.png";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 
-const navbar = () => {
+const DashboardNavbar = () => {
+const {logoutUser,user}=useContext(AuthContext)
 
 
- const handleLogout=()=>{}
+
+ const handleLogout=()=>{
+  logoutUser()
+  .then(()=>{})
+  .catch(e=>console.log(e))
+ }
 
 
   const menuItems = (
@@ -73,23 +80,28 @@ const navbar = () => {
         </div>
       </div>
     </div>
+   {
+    user ?
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img src="https://placeimg.com/80/80/people"  alt=""/>
-        </div>
-      </label>
-      <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <Link to={'/profile'} className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </Link>
-        </li>
-        <li><a href='#!'>Settings</a></li>
-        <li><button onClick={handleLogout}>Logout</button></li>
-      </ul>
-    </div>
+    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+      <div className="w-10 rounded-full">
+        <img src="https://placeimg.com/80/80/people"  alt=""/>
+      </div>
+    </label>
+    <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+      <li>
+        <Link to={'/profile'} className="justify-between">
+          Profile
+          <span className="badge">New</span>
+        </Link>
+      </li>
+      <li><a href='#!'>Settings</a></li>
+      <li><button onClick={handleLogout}>Logout</button></li>
+    </ul>
+  </div>
+  :
+  <div>not user</div>
+   }
   </div>
 </div>
       </div>
@@ -99,4 +111,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default DashboardNavbar;

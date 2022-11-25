@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
+import useAdmin from "../Hooks/useAdmin";
 import DashboardNavbar from "../Pages/Shared/Navbar/DashboardNavbar";
 
+
 const DashboardLayout = () => {
+  const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
   const menubar = (
     <>
       <li className="font-bold text-md">
-        <Link to={"/dashboard"}>Dashboard</Link>
+        <Link to={"/admin/dashboard"}>Dashboard</Link>
       </li>
-      <li className="font-bold text-md">
-        <Link to={"/dashboard/all-sellers"}>All Sellers</Link>
-      </li>
-      <li className="font-bold text-md  ">
-        <Link to={"/dashboard/all-buyers"}>All Buyers</Link>
-      </li>
+      {isAdmin && (
+        <>
+          <li className="font-bold text-md">
+            <Link to={"/admin/dashboard/all-sellers"}>All Sellers</Link>
+          </li>
+
+          <li className="font-bold text-md  ">
+            <Link to={"/admin/dashboard/all-buyers"}>All Buyers</Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (

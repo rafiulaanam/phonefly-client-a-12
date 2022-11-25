@@ -9,7 +9,9 @@ import Dashboard from "../Pages/DashBoard/Dashboard";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/LoginRegister/Login";
 import Register from "../Pages/LoginRegister/Register";
+import PrivateRoute from "./PrivateRoute";
 import SingleCategory from "../Pages/SingleCategory/SingleCategory";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -47,23 +49,23 @@ export const router = createBrowserRouter([
 
     },
     {
-        path: "/dashboard",
-       element:<DashboardLayout></DashboardLayout>,
+        path: "/",
+       element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
        errorElement:<Error></Error>,
        children:[
         {
-            path:"/dashboard",
-            element:<Dashboard></Dashboard>,
+            path:"/admin/dashboard",
+            element:<AdminRoute><Dashboard></Dashboard></AdminRoute>,
 
         },
         {
-            path:"/dashboard/all-buyers",
-            element:<AllBuyers></AllBuyers>,
+            path:"/admin/dashboard/all-buyers",
+            element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>,
 
         },
         {
-            path:"/dashboard/all-sellers",
-            element:<AllSellers></AllSellers>,
+            path:"/admin/dashboard/all-sellers",
+            element:<AdminRoute><AllSellers></AllSellers></AdminRoute>,
 
         }
        ]
