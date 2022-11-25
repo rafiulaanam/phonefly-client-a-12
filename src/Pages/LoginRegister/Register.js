@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom'
 
 const Register = () => {//formState: { errors }
   const { register, handleSubmit,  } = useForm();
-  const {createUser,updateUser} =useContext(AuthContext)
+  const {createUser,updateUser,continueWithGoogle} =useContext(AuthContext)
   const navigate = useNavigate()
 
 const handleRegister = (data,event)=>{
@@ -37,6 +37,19 @@ const handleUpdateUser=(name,email,phone,location,role)=>{
     saveUsersData(name,email,phone,location,role)
     })
     .catch(e=>console.log(e))
+}
+
+const handleGoogle=()=>{
+  continueWithGoogle()
+  .then(result=>{
+    const user = result.user
+    console.log(user)
+    const role ='Buyer'
+    const location = null
+    saveUsersData(user.displayName,user.email,user.phoneNumber,location,role)
+
+  })
+  .catch(e=>console.log(e))
 }
 
 const saveUsersData=(name,email,phone,location,role)=>{
@@ -132,7 +145,7 @@ const saveUsersData=(name,email,phone,location,role)=>{
         </div>
         </form>
         <div className="divider">OR</div>
-        <button className='btn btn-outline rounded-full hover:border-none hover:bg-gradient-to-r from-[#874da2] to-[#c43a30] '><FaGoogle className='mr-3 text-xl'/>Continue With Google </button>
+        <button onClick={handleGoogle} className='btn btn-outline rounded-full hover:border-none hover:bg-gradient-to-r from-[#874da2] to-[#c43a30] '><FaGoogle className='mr-3 text-xl'/>Continue With Google </button>
       
     </div>
   </div>

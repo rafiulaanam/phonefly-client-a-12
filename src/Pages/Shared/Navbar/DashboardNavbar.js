@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../Assets/logo.png";
 import { AuthContext } from "../../../Context/AuthProvider";
+import userPhoto from "../../../Assets/img/user.png"
 
 
 const DashboardNavbar = () => {
 const {logoutUser,user}=useContext(AuthContext)
-
+const navigate = useNavigate()
 
 
  const handleLogout=()=>{
   logoutUser()
-  .then(()=>{})
+  .then(()=>{
+    navigate('/')
+  })
   .catch(e=>console.log(e))
  }
 
@@ -80,12 +83,12 @@ const {logoutUser,user}=useContext(AuthContext)
         </div>
       </div>
     </div>
-   {
-    user ?
+ 
     <div className="dropdown dropdown-end">
     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
       <div className="w-10 rounded-full">
-        <img src="https://placeimg.com/80/80/people"  alt=""/>
+      
+        <img src={user?.photoURL ? user.photoURL : userPhoto}  alt="N/A"/>
       </div>
     </label>
     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -99,9 +102,7 @@ const {logoutUser,user}=useContext(AuthContext)
       <li><button onClick={handleLogout}>Logout</button></li>
     </ul>
   </div>
-  :
-  <div>not user</div>
-   }
+ 
   </div>
 </div>
       </div>

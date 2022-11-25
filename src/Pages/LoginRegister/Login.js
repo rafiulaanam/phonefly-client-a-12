@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom'
 const Login = () => { //formState: { errors }
   const { register, handleSubmit,  } = useForm();
   const navigate = useNavigate()
-  const {loginUser} =useContext(AuthContext)
+  const {loginUser,continueWithGoogle} =useContext(AuthContext)
 
   const handleLogin = (data,event)=>{
 
@@ -28,6 +28,42 @@ const Login = () => { //formState: { errors }
     })
    .catch(e=>console.log(e))
    
+}
+
+const handleGoogle=()=>{
+  continueWithGoogle()
+  .then(result=>{
+    const user = result.user
+    console.log(user)
+    const role ='Buyer'
+    const location = null
+    saveUsersData(user.displayName,user.email,user.phoneNumber,location,role)
+
+  })
+  .catch(e=>console.log(e))
+}
+
+const saveUsersData=(name,email,phone,location,role)=>{
+  const userData={
+    name,
+    email,
+    phone,
+    location,
+    role,
+    identity:"Not Verified"
+  }
+  fetch('http://localhost:5000/users',{
+    method: 'POST',
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify(userData)
+  })
+  .then(data=>{
+    console.log('saved',data)
+    navigate('/')
+  })
+  .catch(e=>console.log(e))
 }
     return (
         <div className="hero ">
@@ -61,7 +97,7 @@ const Login = () => { //formState: { errors }
         </div>
       </form>
         <div className="divider">OR</div>
-        <button className='btn btn-outline rounded-full'><FaGoogle className='mr-3 text-xl'/>Continue With Google</button>
+        <button onClick={handleGoogle} className='btn btn-outline rounded-full'><FaGoogle className='mr-3 text-xl'/>Continue With Google</button>
       
     </div>
   </div>

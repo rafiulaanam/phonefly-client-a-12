@@ -1,7 +1,16 @@
 import React from "react";
+import toast from 'react-hot-toast';
 
 const BookingModal = ({modalInfo}) => {
   const {name,description,sale_price,price,location,img}=modalInfo;
+
+  const handleBooked =(event)=>{
+    event.preventDefault()
+    const form = event.target;
+    const phone = form.phone.value
+    console.log(phone)
+    toast.success('Booking Successfully')
+  }
 
   return (
     <div>
@@ -26,10 +35,13 @@ const BookingModal = ({modalInfo}) => {
           <p className="card-text py-4">
             Meeting location: {location}
             </p>
-            <input type="text" placeholder="Phone" defaultValue={'+880'} className="input input-bordered  w-full " />
+            <form onSubmit={handleBooked}>
+            <input type="text" name="phone" placeholder="Phone" defaultValue={'+880'} className="input input-bordered  w-full " />
           <div className="modal-action">
-          <label   htmlFor="booking-modal" className="text-white w-full border-none px-8 btn bg-gradient-to-r from-[#874da2] to-[#c43a30]">Submit</label>
+            <input type="submit" className="text-white w-full border-none px-8 btn bg-gradient-to-r from-[#874da2] to-[#c43a30]" value="Submit" />
+          
           </div>
+            </form>
         </div>
       </div>
     </div>

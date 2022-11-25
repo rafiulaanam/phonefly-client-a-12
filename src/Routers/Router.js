@@ -3,15 +3,17 @@ import Error from "../Components/Error/Error";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import Categories from "../Pages/Categories/Categories";
-import AllBuyers from "../Pages/DashBoard/AllBuyers";
-import AllSellers from "../Pages/DashBoard/AllSellers";
-import Dashboard from "../Pages/DashBoard/Dashboard";
+import AllBuyers from "../Pages/DashBoards/Admin/AllBuyers";
+import AllSellers from "../Pages/DashBoards/Admin/AllSellers";
+import Dashboard from "../Pages/DashBoards/Admin/Dashboard";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/LoginRegister/Login";
 import Register from "../Pages/LoginRegister/Register";
 import PrivateRoute from "./PrivateRoute";
 import SingleCategory from "../Pages/SingleCategory/SingleCategory";
 import AdminRoute from "./AdminRoute";
+import SellerRoute from "./SellerRoute";
+import BuyerRoute from "./BuyerRoute";
 
 export const router = createBrowserRouter([
     {
@@ -66,6 +68,36 @@ export const router = createBrowserRouter([
         {
             path:"/admin/dashboard/all-sellers",
             element:<AdminRoute><AllSellers></AllSellers></AdminRoute>,
+
+        },
+        {
+            path:"/seller/dashboard",
+            element:<SellerRoute><Dashboard></Dashboard></SellerRoute>,
+
+        },
+        {
+            path:"/seller/dashboard/all-buyers",
+            element:<SellerRoute><AllBuyers></AllBuyers></SellerRoute>,
+
+        },
+        {
+            path:"/seller/dashboard/all-sellers",
+            element:<SellerRoute><AllSellers></AllSellers></SellerRoute>,
+
+        },
+        {
+            path:"/buyer/dashboard",
+            element:<BuyerRoute><Dashboard></Dashboard></BuyerRoute>,
+
+        },
+        {
+            path:"/buyer/dashboard/all-buyers",
+            element:<BuyerRoute><AllBuyers></AllBuyers></BuyerRoute>,
+
+        },
+        {
+            path:"/buyer/dashboard/all-sellers",
+            element:<BuyerRoute><AllSellers></AllSellers></BuyerRoute>,
 
         }
        ]
