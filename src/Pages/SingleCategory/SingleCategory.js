@@ -7,7 +7,7 @@ import Phone from "../Categories/Phone";
 const SingleCategory = () => {
   const [modalInfo, setModalInfo] = useState(null);
   const SingleCategory = useLoaderData();
-  console.log(SingleCategory);
+  
   return (
     <div>
       <CategoryBar></CategoryBar>

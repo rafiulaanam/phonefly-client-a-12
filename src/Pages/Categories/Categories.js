@@ -30,7 +30,11 @@ const Categories = () => {
         ))}
       </div>
 
-      {modalInfo && <BookingModal modalInfo={modalInfo}></BookingModal>}
+      {modalInfo && 
+      <BookingModal 
+      modalInfo={modalInfo}
+      setModalInfo={setModalInfo}
+      ></BookingModal>}
     </div>
   );
 };

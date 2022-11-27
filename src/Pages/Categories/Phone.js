@@ -1,5 +1,6 @@
 import React from "react";
 import { FcOk } from "react-icons/fc";
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const Phone = ({ category, setModalInfo }) => {
   const {
@@ -16,7 +17,12 @@ const Phone = ({ category, setModalInfo }) => {
     <div>
       <div className="card card-side bg-base-100 shadow-xl">
         <figure>
-          <img src={img} alt="Movie" />
+        <PhotoProvider>
+      <PhotoView src={img}>
+      <img className="cursor-zoom-in" src={img} alt="Movie" />
+      </PhotoView>
+    </PhotoProvider>
+          
         </figure>
         <div className="card-body">
           <h2 className="card-title">{name}</h2>
@@ -37,7 +43,7 @@ const Phone = ({ category, setModalInfo }) => {
             <span className="font-semibold flex ml-2">
               {seller_name}
               <sup className="ml-1 text-xl">
-                {identity === "Not Verified" ? " " : <FcOk />}
+                {identity === "Verified" ?  <FcOk />:" " }
               </sup>
             </span>
           </p>

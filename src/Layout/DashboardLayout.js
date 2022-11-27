@@ -41,10 +41,10 @@ const DashboardLayout = () => {
             <Link to={"/seller/dashboard/add-product"}>Add A Product</Link>
           </li>
 
-          <li className="font-bold text-md  ">
+          <li className="font-bold text-md">
             <Link to={"/seller/dashboard/my-products"}>My Products</Link>
           </li>
-          <li className="font-bold text-md  ">
+          <li className="font-bold text-md">
             <Link to={"/seller/dashboard/my-buyers"}>My Buyers</Link>
           </li>
         </>
@@ -74,7 +74,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-modal" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-200 text-base-content">
+          <ul className="menu p-4 w-80  text-base-content">
             {menubar}
           </ul>
         </div>

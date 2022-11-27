@@ -64,7 +64,7 @@ const navigate = useNavigate()
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
 
-      <div className="navbar-end hidden lg:flex">
+      <div className="navbar-end  lg:flex">
       <div className="flex-none">
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle">

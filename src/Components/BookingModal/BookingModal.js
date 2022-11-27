@@ -1,47 +1,91 @@
-import React from "react";
-import toast from 'react-hot-toast';
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Context/AuthProvider";
 
-const BookingModal = ({modalInfo}) => {
-  const {name,description,sale_price,price,location,img}=modalInfo;
+const BookingModal = ({ modalInfo,setModalInfo }) => {
+  const {user} = useContext(AuthContext)
+  const { name, description, sale_price, price, location, img, seller_name,
+    identity, } = modalInfo;
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm();
 
-  const handleBooked =(event)=>{
-    event.preventDefault()
-    const form = event.target;
-    const phone = form.phone.value
-    console.log(phone)
-    toast.success('Booking Successfully')
-  }
+  const handleBook = (data) => {
+    console.log(data);
+    const bookingData={
+      buyer_name:user.displayName,
+      name,
+      sale_price,
+      email:user.email,
+      phone:data.phone,
+      location,
+      seller_name,
+      identity,
+      status: 'Booked',
+      payment:'Unpaid'
+    }
+    fetch('http://localhost:5000/bookings',{
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(bookingData)
+    })
+    .then(data=>{
+      console.log('saved',data)
+      
+    })
+    .catch(e=>console.log(e))
+    toast.success("Booking Success");
+    setModalInfo(null)
+  };
 
   return (
     <div>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-        <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <label
+            htmlFor="booking-modal"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
           <div className="flex justify-center">
-          <img className="w-28" src={img} alt="" />
+            <img className="w-28" src={img} alt="" />
           </div>
-          <h3 className="font-bold text-lg mt-4">
-           {name}
-          </h3>
-          <p className="py-4">
-          {description}
-          </p>
+          <h3 className="font-bold text-lg mt-4">{name}</h3>
+          <p className="py-4">{description}</p>
           <p className="card-text">
             Price: $
             <span className="text-3xl font-semibold ">{sale_price}</span>{" "}
             <del>{price}</del>
           </p>
-          <p className="card-text py-4">
-            Meeting location: {location}
-            </p>
-            <form onSubmit={handleBooked}>
-            <input type="text" name="phone" placeholder="Phone" defaultValue={'+880'} className="input input-bordered  w-full " />
-          <div className="modal-action">
-            <input type="submit" className="text-white w-full border-none px-8 btn bg-gradient-to-r from-[#874da2] to-[#c43a30]" value="Submit" />
-          
-          </div>
-            </form>
+          <p className="card-text py-4">Meeting location: {location}</p>
+          <form onSubmit={handleSubmit(handleBook)}>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Phone</span>
+              </label>
+              <input
+                {...register("phone")}
+                type="number"
+                name="phone"
+                placeholder="Enter your Phone"
+                className="input input-bordered"
+              />
+            </div>
+            <div className="modal-action">
+              <input
+                type="submit"
+                className="text-white w-full border-none px-8 btn bg-gradient-to-r from-[#874da2] to-[#c43a30]"
+                value="Submit"
+              />
+            </div>
+          </form>
         </div>
       </div>
     </div>
