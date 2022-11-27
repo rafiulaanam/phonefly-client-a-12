@@ -23,7 +23,7 @@ const Banner = () => {
     </div>
     
     <div className="absolute  transform -translate-y-1/2 left-20 pt-20 lg:pt-40 lg:ml-6 top-1/4">
-     <h1 className='lg:text-5xl font-bold  text-white'> Psychology of Creative <br/> Photography</h1>
+     <h1 className='lg:text-5xl font-bold  text-white'>Communication is at the heart of <br/> e-commerce and community. </h1>
      <p className='mt-8 text-white hidden lg:block'>Photographed may seem like just another cultural/analytical site. <br/> However, like Creative Bloom, this blog includes a lot of great gear <br/> reviews and is a place where photography aficionados.</p>
     
     </div>
@@ -39,7 +39,7 @@ const Banner = () => {
     </div>
 
     <div className="absolute  transform -translate-y-1/2 left-20 pt-20 lg:pt-40 lg:ml-6 top-1/4">
-     <h1 className='lg:text-5xl font-bold  text-white'> Many of the world’s most prominent<br/> Photography</h1>
+     <h1 className='lg:text-5xl font-bold  text-white'> Many of the world’s most prominent<br/> Phones</h1>
      <p className='mt-8 text-white hidden lg:block'>Physiographer may seem like just another cultural/analytical site. <br/> However, like Creative Bloom, this blog includes a lot of great gear <br/> reviews and is a place where photography aficionados.</p>
     
     </div>
@@ -54,7 +54,7 @@ const Banner = () => {
     </div>
 
     <div className="absolute  transform -translate-y-1/2 left-20 pt-20 lg:pt-40 lg:ml-6 top-1/4">
-     <h1 className='lg:text-5xl font-bold  text-white'> Hack it as a successful <br/> Photography</h1>
+     <h1 className='lg:text-5xl font-bold  text-white'> Hack it as a successful <br/> Experience of Buying</h1>
      <p className='mt-8 text-white hidden lg:block'>Physiographer may seem like just another cultural/analytical site. <br/> However, like Creative Bloom, this blog includes a lot of great gear <br/> reviews and is a place where photography aficionados.</p>
     
     </div>
@@ -65,7 +65,7 @@ const Banner = () => {
     </div>
 
     <div className="absolute  transform -translate-y-1/2 left-20 pt-20 lg:pt-40 lg:ml-6 top-1/4">
-     <h1 className='lg:text-5xl font-bold  text-white'> Jamie Swanson writes <br/> Photography</h1>
+     <h1 className='lg:text-5xl font-bold  text-white'> Amazing things will happen <br/>when you listen to the consumer.  </h1>
      <p className='mt-8 text-white hidden lg:block'>Photographers may seem like just another cultural/analytical site. <br/> However, like Creative Bloom, this blog includes a lot of great gear <br/> reviews and is a place where photography aficionados.</p>
     
     </div>
