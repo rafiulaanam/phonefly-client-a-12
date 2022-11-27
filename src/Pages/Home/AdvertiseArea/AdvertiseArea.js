@@ -12,7 +12,7 @@ const AdvertiseArea = () => {
       return data;
     },
   });
-  console.log(RunAds.length)
+ 
   return (
     <div className="mt-10">
       { RunAds.length > 0 &&

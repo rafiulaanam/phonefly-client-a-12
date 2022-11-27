@@ -1,21 +1,15 @@
 import React from 'react';
-import toast from "react-hot-toast";
-import { useForm } from "react-hook-form";
 import {loadStripe} from '@stripe/stripe-js';
-import {CardElement, Elements, useElements, useStripe} from '@stripe/react-stripe-js';
+import { Elements} from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
 
 const stripePromise = loadStripe(process.env.REACT_APP_stripe_key);
 
 const PaymentModal = ({paymentInfo}) => {
-    const { _id, name, description, sale_price, price, location, img, phone } =
+    const { name,  sale_price, price, img} =
     paymentInfo;
-  const { register, handleSubmit } = useForm();
-//   const [status, setStatus] =useState()
-console.log(stripePromise)
-  const handlePayment = (data) => {
-   
-  };
+
+
     return (
         <div>
              <div className=''>
@@ -40,23 +34,11 @@ console.log(stripePromise)
           </p>
           <p className="card-text py-4">Meeting location: {'location'}</p>
           
-          <form onSubmit={handleSubmit(handlePayment)}>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Phone</span>
-              </label>
-              <input
-                {...register("phone")}
-                type="number"
-                name="phone"
-                placeholder="Enter your Phone"
-                className="input input-bordered"
-              />
-            </div>
-            
-          </form>
+         
           <Elements stripe={stripePromise}>
-      <CheckoutForm />
+      <CheckoutForm 
+      sale_price={sale_price}
+      />
     </Elements>
         </div>
       </div>

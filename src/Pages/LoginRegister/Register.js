@@ -1,16 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import reg from '../../Assets/img/register.jpg'
 import { FaGoogle } from 'react-icons/fa';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom'
+import useToken from '../../Hooks/useToken';
 
 
 const Register = () => {//formState: { errors }
+  const navigate = useNavigate();
+  const [createdUserEmail, setCreatedUserEmail] = useState('')
+  const [token] = useToken(createdUserEmail)
+  if(token){
+  navigate('/')
+  }
+
   const { register, handleSubmit,  } = useForm();
   const {createUser,updateUser,continueWithGoogle} =useContext(AuthContext)
-  const navigate = useNavigate()
+  
 
 const handleRegister = (data,event)=>{
  
@@ -21,6 +29,7 @@ const handleRegister = (data,event)=>{
       const user = result.user
       console.log(user)
       form.reset()
+     
       handleUpdateUser(data.name,data.email,data.phone,data.location,data.role)
       toast.success("Register Successfully")
       
@@ -69,8 +78,10 @@ const saveUsersData=(name,email,phone,location,role)=>{
     body:JSON.stringify(userData)
   })
   .then(data=>{
-    console.log('saved',data)
-    navigate('/')
+   console.log(data)
+   setCreatedUserEmail(email)
+
+    
   })
   .catch(e=>console.log(e))
 }

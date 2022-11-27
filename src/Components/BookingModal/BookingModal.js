@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
+import {useNavigate} from 'react-router-dom'
 
 const BookingModal = ({ modalInfo,setModalInfo }) => {
+
   const {user} = useContext(AuthContext)
   const { name, description, sale_price, price, location, img, seller_name,
     identity, } = modalInfo;
@@ -12,14 +14,16 @@ const BookingModal = ({ modalInfo,setModalInfo }) => {
     handleSubmit,
     // formState: { errors },
   } = useForm();
+  const navigate =useNavigate()
 
   const handleBook = (data) => {
     console.log(data);
+   if(user){
     const bookingData={
-      buyer_name:user.displayName,
+      buyer_name:user?.displayName,
       name,
       sale_price,
-      email:user.email,
+      email:user?.email,
       phone:data.phone,
       location,
       seller_name,
@@ -37,11 +41,17 @@ const BookingModal = ({ modalInfo,setModalInfo }) => {
     })
     .then(data=>{
       console.log('saved',data)
-      
+       toast.success("Booking Success");
+    setModalInfo(null)
     })
     .catch(e=>console.log(e))
-    toast.success("Booking Success");
+   }
+   else{
+    toast.error("Please Register");
     setModalInfo(null)
+    navigate('/register')
+   }
+   
   };
 
   return (

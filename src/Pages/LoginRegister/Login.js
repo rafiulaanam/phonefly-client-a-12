@@ -1,15 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import login from '../../Assets/img/login.jpg'
 import { FaGoogle } from 'react-icons/fa';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom'
+import useToken from '../../Hooks/useToken';
 
 const Login = () => { //formState: { errors }
   const { register, handleSubmit,  } = useForm();
   const navigate = useNavigate()
   const {loginUser,continueWithGoogle} =useContext(AuthContext)
+  const [LoginUserEmail, setLoginUserEmail] = useState('')
+  const [token] = useToken(LoginUserEmail)
+ 
+  if(token){
+  navigate('/')
+  }
 
   const handleLogin = (data,event)=>{
 
@@ -23,7 +30,8 @@ const Login = () => { //formState: { errors }
       form.reset()
      
       toast.success("Login Successfully")
-      navigate('/')
+      setLoginUserEmail(data.email)
+      
       
     })
    .catch(e=>console.log(e))

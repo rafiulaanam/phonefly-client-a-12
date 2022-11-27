@@ -1,7 +1,7 @@
 import React from 'react';
 
 const BookedCards = ({book,setPaymentInfo}) => {
-    const {_id,name,status,payment,img,sale_price,price}= book;
+    const {name,status,payment,img,sale_price,price}= book;
     return (
         <div className='my-5'>
             <div className="card card-side bg-base-100 shadow-xl">
