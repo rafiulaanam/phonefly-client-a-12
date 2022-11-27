@@ -74,7 +74,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-modal" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80  text-base-content">
+          <ul className="menu p-4 w-80  lg:bg-none md:bg-none text-base-content">
             {menubar}
           </ul>
         </div>

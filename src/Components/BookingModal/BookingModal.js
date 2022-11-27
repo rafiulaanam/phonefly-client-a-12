@@ -25,7 +25,8 @@ const BookingModal = ({ modalInfo,setModalInfo }) => {
       seller_name,
       identity,
       status: 'Booked',
-      payment:'Unpaid'
+      payment:'Unpaid',
+      img,
     }
     fetch('http://localhost:5000/bookings',{
       method: 'POST',

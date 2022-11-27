@@ -20,6 +20,7 @@ import Profile from "../Pages/Profile/Profile";
 import MyProduct from "../Pages/DashBoards/Seller/MyProduct";
 import MyBuyers from "../Pages/DashBoards/Seller/MyBuyers";
 import ReportedItem from "../Pages/DashBoards/Admin/ReportedItem";
+import MyOrders from "../Pages/DashBoards/Buyer/MyOrders";
 
 export const router = createBrowserRouter([
   {
@@ -141,21 +142,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/buyer/dashboard/all-buyers",
+        path: "/buyer/dashboard/my-orders",
         element: (
           <BuyerRoute>
-            <AllBuyers></AllBuyers>
+            <MyOrders></MyOrders>
           </BuyerRoute>
         ),
       },
-      {
-        path: "/buyer/dashboard/all-sellers",
-        element: (
-          <BuyerRoute>
-            <AllSellers></AllSellers>
-          </BuyerRoute>
-        ),
-      },
+      
       {
         path: "/profile",
         element: <Profile></Profile>,
