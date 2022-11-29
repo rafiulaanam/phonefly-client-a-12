@@ -6,57 +6,64 @@ import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom'
 import useToken from '../../Hooks/useToken';
+import Spinner from '../../Components/Spinner/Spinner';
 
 
 const Register = () => {//formState: { errors }
   const navigate = useNavigate();
   const [createdUserEmail, setCreatedUserEmail] = useState('')
-  const [token] = useToken(createdUserEmail)
-  if(token){
-  navigate('/')
-  }
 
+  const [token] = useToken(createdUserEmail)
   const { register, handleSubmit,  } = useForm();
   const {createUser,updateUser,continueWithGoogle} =useContext(AuthContext)
+ 
+const [loading,setLoading]= useState('')
+
+if(token){
+  setLoading(false)
+  window.location.reload()
+ return navigate('/')
+  }
+ 
+  if(loading){
+    return <Spinner></Spinner>
+  }
   
 
 const handleRegister = (data,event)=>{
  
   const form = event.target;
-   
+  setLoading(true)
     createUser(data.email, data.password)
-    .then(result=>{
-      const user = result.user
-      console.log(user)
+    .then(()=>{
       form.reset()
+      const userInfo={
+        displayName:data.name
+      }
+      updateUser(userInfo)
+       .then(()=>{
+   
+        saveUsersData(data.name,data.email,data.phone,data.location,data.role)
+        
+        })
+        .catch(e=>console.log(e))
      
-      handleUpdateUser(data.name,data.email,data.phone,data.location,data.role)
       toast.success("Register Successfully")
-      
+   
     })
    .catch(e=>console.log(e))
 }
-const handleUpdateUser=(name,email,phone,location,role)=>{
-  const userInfo={
-    displayName:name
-  }
-  updateUser(userInfo)
-   .then(()=>{
-    
-    saveUsersData(name,email,phone,location,role)
-    })
-    .catch(e=>console.log(e))
-}
+
 
 const handleGoogle=()=>{
   continueWithGoogle()
   .then(result=>{
     const user = result.user
     console.log(user)
-    const role ='Buyer'
+    const gRole ='Buyer'
     const location = null
-    saveUsersData(user.displayName,user.email,user.phoneNumber,location,role)
-
+    saveUsersData(user.displayName,user.email,user.phoneNumber,location,gRole)
+    setCreatedUserEmail(user.email)
   })
   .catch(e=>console.log(e))
 }
@@ -77,14 +84,21 @@ const saveUsersData=(name,email,phone,location,role)=>{
     },
     body:JSON.stringify(userData)
   })
+  .then(res=>res.json())
   .then(data=>{
+    if(data.acknowledged){
+     
+      setCreatedUserEmail(email)
+      
+    }
    console.log(data)
-   setCreatedUserEmail(email)
+  
 
     
   })
   .catch(e=>console.log(e))
 }
+
     return (
         <div className="hero ">
   <div className="hero-content flex-col lg:flex-row-reverse">
@@ -124,7 +138,7 @@ const saveUsersData=(name,email,phone,location,role)=>{
           <select
           {...register("location")}
           name='location' className="select select-bordered w-full max-w-xs">
-  <option disabled selected>select your location</option>
+  <option disabled >select your location</option>
   <option value={'Sylhet'}>Sylhet</option>
   <option value={'Dhaka'}>Dhaka</option>
 </select>

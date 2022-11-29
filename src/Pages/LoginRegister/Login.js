@@ -46,7 +46,7 @@ const handleGoogle=()=>{
     const role ='Buyer'
     const location = null
     saveUsersData(user.displayName,user.email,user.phoneNumber,location,role)
-
+    setLoginUserEmail(user.email)
   })
   .catch(e=>console.log(e))
 }

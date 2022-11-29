@@ -37,7 +37,7 @@ const PaymentModal = ({paymentInfo}) => {
          
           <Elements stripe={stripePromise}>
       <CheckoutForm 
-      sale_price={sale_price}
+      paymentInfo={paymentInfo}
       />
     </Elements>
         </div>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-
 const useBuyer = (email) => {
 const [isBuyer, setIsBuyer] = useState(false)
 const [isBuyerLoading, setIsBuyerLoading] = useState(true)
@@ -18,6 +17,7 @@ const [isBuyerLoading, setIsBuyerLoading] = useState(true)
 }
 
 },[email])
+
 return [isBuyer,isBuyerLoading]
 };
 

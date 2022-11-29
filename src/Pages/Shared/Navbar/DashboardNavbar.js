@@ -13,6 +13,7 @@ const navigate = useNavigate()
  const handleLogout=()=>{
   logoutUser()
   .then(()=>{
+    localStorage.removeItem('accessToken')
     navigate('/')
   })
   .catch(e=>console.log(e))

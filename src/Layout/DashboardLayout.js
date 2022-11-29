@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useContext} from "react";
+import { Link, Outlet} from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import useAdmin from "../Hooks/useAdmin";
 import useBuyer from "../Hooks/useBuyer";
@@ -12,6 +12,9 @@ const DashboardLayout = () => {
   const [isAdmin] = useAdmin(user?.email);
   const [isSeller] = useSeller(user?.email);
   const [isBuyer] = useBuyer(user?.email);
+
+
+
   const menubar = (
     <>
       
@@ -56,6 +59,9 @@ const DashboardLayout = () => {
       </li>
           <li className="font-bold text-md">
             <Link to={"/buyer/dashboard/my-orders"}>My Orders</Link>
+          </li>
+          <li className="font-bold text-md">
+            <Link to={"/buyer/dashboard/my-wishlist"}>My Wishlist</Link>
           </li>
 
         

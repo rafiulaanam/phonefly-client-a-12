@@ -1,3 +1,12 @@
+# if you don't get any options then please reload and check.
+
+Admin Email: ami@admin.com
+Admin Password: amirafi
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

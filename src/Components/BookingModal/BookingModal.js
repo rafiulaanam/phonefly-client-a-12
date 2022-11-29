@@ -40,7 +40,7 @@ const BookingModal = ({ modalInfo,setModalInfo }) => {
       body:JSON.stringify(bookingData)
     })
     .then(data=>{
-      console.log('saved',data)
+     
        toast.success("Booking Success");
     setModalInfo(null)
     })

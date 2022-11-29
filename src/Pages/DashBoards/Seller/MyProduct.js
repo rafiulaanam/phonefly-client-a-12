@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import EditDetailsModal from '../../../Components/EditDetailsModal/EditDetailsModal';
+import Spinner from '../../../Components/Spinner/Spinner';
 import { AuthContext } from '../../../Context/AuthProvider';
 import ProductTable from './ProductTable';
 
@@ -8,7 +9,7 @@ const MyProduct = () => {
     const [myProducts, setMyProducts]=useState(null)
     const {user} = useContext(AuthContext);
     const url = `http://localhost:5000/my-products?email=${user?.email}`;
-    const { data: products = [],refetch} = useQuery({
+    const { data: products = [],refetch,isLoading} = useQuery({
       queryKey: ["products",user?.email],
       queryFn: async () => {
         const res = await fetch(url);
@@ -17,7 +18,9 @@ const MyProduct = () => {
       },
     });
   
-  
+    if(isLoading){
+      return <Spinner></Spinner>
+    }
    
    
  

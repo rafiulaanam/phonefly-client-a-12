@@ -1,10 +1,11 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import AdsCard from "./AdsCard";
+import Spinner from "../../../Components/Spinner/Spinner";
 
 const AdvertiseArea = () => {
   const url = `http://localhost:5000/my-ads?ads=RunAds`;
-  const { data: RunAds = [] } = useQuery({
+  const { data: RunAds = [] ,isLoading} = useQuery({
     queryKey: ["RunAds"],
     queryFn: async () => {
       const res = await fetch(url);
@@ -12,7 +13,9 @@ const AdvertiseArea = () => {
       return data;
     },
   });
- 
+  if(isLoading){
+    return <Spinner></Spinner>
+  }
   return (
     <div className="mt-10">
       { RunAds.length > 0 &&
@@ -28,8 +31,10 @@ const AdvertiseArea = () => {
         ></AdsCard>)
        }
         </div>
+        
       </div>
       }
+      
     </div>
   );
 };

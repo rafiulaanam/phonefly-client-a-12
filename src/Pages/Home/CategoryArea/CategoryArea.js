@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../../Components/Spinner/Spinner";
 
 const CategoryArea = () => {
   const url = `http://localhost:5000/category`;
 
-  const { data: categories = [] } = useQuery({
+  const { data: categories = [] ,isLoading} = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
       const res = await fetch(url);
@@ -13,7 +14,9 @@ const CategoryArea = () => {
       return data;
     },
   });
-
+  if(isLoading){
+    return <Spinner></Spinner>
+  }
   return (
     <div>
       <div className="container mx-auto my-20">

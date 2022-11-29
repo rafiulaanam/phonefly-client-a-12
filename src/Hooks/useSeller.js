@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const useSeller = (email) => {
 const [isSeller, setIsSeller] = useState(false)
 const [isSellerLoading, setIsSellerLoading] = useState(true)
+const [isRerender, setIsRerender] = useState(false)
 
   useEffect(()=>{
     if(email){
@@ -16,8 +17,8 @@ const [isSellerLoading, setIsSellerLoading] = useState(true)
     
 }
 
-},[email])
-return [isSeller,isSellerLoading]
+},[email,isRerender])
+return [isSeller,isSellerLoading,setIsRerender]
 };
 
 export default useSeller;

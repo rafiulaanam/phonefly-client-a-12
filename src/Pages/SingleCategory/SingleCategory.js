@@ -14,7 +14,7 @@ const SingleCategory = () => {
       <div className="grid grid-cols-1 gap-4 container mx-auto">
         {SingleCategory.map((category) => (
           <Phone
-            key={category.id}
+            key={category._id}
             category={category}
             setModalInfo={setModalInfo}
           ></Phone>

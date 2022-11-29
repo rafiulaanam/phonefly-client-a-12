@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import CategoryBar from "./CategoryBar";
 import { useQuery } from "@tanstack/react-query";
 import Phone from "./Phone";
 import BookingModal from "../../Components/BookingModal/BookingModal";
 
 const Categories = () => {
+
+
   const [modalInfo, setModalInfo] = useState(null);
 
   const url = `http://localhost:5000/all-phones`;
@@ -23,7 +25,7 @@ const Categories = () => {
       <div className="grid grid-cols-1 gap-4 container mx-auto">
         {categories.map((category) => (
           <Phone
-            key={category.id}
+            key={category._id}
             category={category}
             setModalInfo={setModalInfo}
           ></Phone>
