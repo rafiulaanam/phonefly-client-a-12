@@ -13,7 +13,7 @@ const ReportedItem = () => {
     },
   });
 
-  const handleDelete = (id) => {
+  const handleDelete = (id) => { 
     fetch(`https://phonefly-server-a-12-rafiulaanam.vercel.app/reports/${id}`, {
       method: "DELETE",
       headers: {
