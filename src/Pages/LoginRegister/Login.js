@@ -87,7 +87,7 @@ const saveUsersData=(name,email,phone,location,role)=>{
           </label>
           <input 
           {...register("email")}
-          type="email" name='email' placeholder="email" className="input input-bordered" />
+          type="email" name='email' placeholder="email" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
@@ -95,7 +95,7 @@ const saveUsersData=(name,email,phone,location,role)=>{
           </label>
           <input
           {...register("password")}
-          type="password" name='password' placeholder="password" className="input input-bordered" />
+          type="password" name='password' placeholder="password" className="input input-bordered" required/>
           <label className="label">
             <a href="#!" className="label-text-alt link link-hover">Forgot password?</a>
           </label>

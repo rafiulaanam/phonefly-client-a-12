@@ -10,7 +10,7 @@ const MyOrders = () => {
     const [paymentInfo, setPaymentInfo] = useState(null);
     const url = `http://localhost:5000/bookings?email=${user?.email}`
 
-const { data:bookings =[],isLoading} = useQuery({
+const { data:bookings =[],isLoading,refetch} = useQuery({
   queryKey:['bookings' , user?.email],
   queryFn: async ()=>{
     const res =await fetch(url,{
@@ -37,10 +37,13 @@ if(isLoading){
                 ></BookedCards>)
             }
         </div>
-        {
-        paymentInfo &&
+        { 
+        paymentInfo && 
         <PaymentModal
+        setPaymentInfo={setPaymentInfo}
         paymentInfo={paymentInfo}
+        refetch={refetch}
+        
         ></PaymentModal>
         }
        </div>

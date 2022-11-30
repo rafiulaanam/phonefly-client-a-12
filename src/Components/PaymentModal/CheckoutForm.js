@@ -6,13 +6,13 @@ import toast from 'react-hot-toast';
 
 
 
-const CheckoutForm = ({paymentInfo}) => {
+const CheckoutForm = ({paymentInfo,setPaymentInfo,refetch}) => {
   const {user} = useContext(AuthContext)
-  const {sale_price,email,buyer_name} = paymentInfo
+  const {_id,sale_price,email,buyer_name} = paymentInfo
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState(" ");
-
+// console.log(buyer_name)
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch(`http://localhost:5000/create-payment-intent?email=${user?.email}`, {
@@ -25,7 +25,12 @@ const CheckoutForm = ({paymentInfo}) => {
       body: JSON.stringify({ sale_price }),
     })
       .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then((data) => {
+        
+        setClientSecret(data.clientSecret)
+        // console.log(data)
+      });
+      
   }, [sale_price,user?.email]);
 
 
@@ -60,7 +65,8 @@ const CheckoutForm = ({paymentInfo}) => {
 
 
     const {paymentIntent, error:confirmError} = await stripe.confirmCardPayment(
-      '{PAYMENT_INTENT_CLIENT_SECRET}',
+      clientSecret,
+      
       {
         payment_method: {
           card: card,
@@ -71,9 +77,32 @@ const CheckoutForm = ({paymentInfo}) => {
         },
       },
     );
+    console.log(paymentIntent)
     if(paymentIntent.status === "succeeded"){
-      toast.success('payment successful');
+      const payment ={
+        sale_price,
+        transactionId: paymentIntent.id,
+        email,
+        bookingId:_id
+
+      }
+fetch('http://localhost:5000/payments',{
+      method: "POST",
+      headers: {
+         "Content-Type": "application/json",
+         authorization:  `Bearer ${localStorage.getItem('accessToken')}` //for jwt
+      },
+      body: JSON.stringify(payment),
+})
+.then(res=>res.json())
+.then(data=>{
+  toast.success('payment successful');
+  setPaymentInfo(null)
+  refetch()
+  console.log(data)
+})
     }
+    console.log(confirmError)
 
   };
 

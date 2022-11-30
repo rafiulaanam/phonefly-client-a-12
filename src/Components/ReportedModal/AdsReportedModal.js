@@ -12,7 +12,7 @@ const AdsReportedModal = ({ adsReportModalInfo, setAdsReportModalInfo }) => {
     // formState: { errors },
   } = useForm();
 console.log(adsReportModalInfo)
-  const handleBook = (data) => {
+  const handleAdsReport = (data) => {
     console.log(data);
     if (user) {
      
@@ -47,7 +47,7 @@ console.log(adsReportModalInfo)
           </label>
           <h3 className="font-bold text-lg">Report this Product</h3>
 
-          <form onSubmit={handleSubmit(handleBook)}>
+          <form onSubmit={handleSubmit(handleAdsReport)}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Subject</span>

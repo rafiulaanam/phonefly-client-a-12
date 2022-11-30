@@ -11,7 +11,7 @@ const Categories = () => {
   const [modalInfo, setModalInfo] = useState(null);
 
   const url = `http://localhost:5000/all-phones`;
-  const { data: categories = [] } = useQuery({
+  const { data: categories = [] ,refetch} = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const res = await fetch(url);
@@ -37,6 +37,7 @@ const Categories = () => {
       <BookingModal 
       modalInfo={modalInfo}
       setModalInfo={setModalInfo}
+      refetch={refetch}
       ></BookingModal>}
 
 
@@ -45,7 +46,7 @@ const Categories = () => {
 {modalInfo &&
          <ReportedModal
          setReportModalInfo={setModalInfo}
-      reportModalInfo={setModalInfo}
+      reportModalInfo={modalInfo}
          ></ReportedModal>
       }
     </div>

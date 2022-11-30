@@ -5,10 +5,10 @@ import CheckoutForm from './CheckoutForm';
 
 const stripePromise = loadStripe(process.env.REACT_APP_stripe_key);
 
-const PaymentModal = ({paymentInfo}) => {
+const PaymentModal = ({paymentInfo,setPaymentInfo,refetch}) => {
     const { name,  sale_price, price, img} =
     paymentInfo;
-
+// console.log(paymentInfo)
 
     return (
         <div>
@@ -38,6 +38,8 @@ const PaymentModal = ({paymentInfo}) => {
           <Elements stripe={stripePromise}>
       <CheckoutForm 
       paymentInfo={paymentInfo}
+      setPaymentInfo={setPaymentInfo}
+      refetch={refetch}
       />
     </Elements>
         </div>

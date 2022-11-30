@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 import {useNavigate} from 'react-router-dom'
 
-const BookingModal = ({ modalInfo,setModalInfo }) => {
+const BookingModal = ({ modalInfo,setModalInfo ,refetch}) => {
 
   const {user} = useContext(AuthContext)
-  const { name, description, sale_price, price, location, img, seller_name,
+  const { _id,name, description, sale_price, price, location, img, seller_name,
     identity, } = modalInfo;
   const {
     register,
@@ -15,9 +15,9 @@ const BookingModal = ({ modalInfo,setModalInfo }) => {
     // formState: { errors },
   } = useForm();
   const navigate =useNavigate()
-
+// console.log(_id)
   const handleBook = (data) => {
-    console.log(data);
+    // console.log(data);
    if(user){
     const bookingData={
       buyer_name:user?.displayName,
@@ -31,18 +31,24 @@ const BookingModal = ({ modalInfo,setModalInfo }) => {
       status: 'Booked',
       payment:'Unpaid',
       img,
+      productId:_id
     }
-    fetch('http://localhost:5000/bookings',{
+    fetch(`http://localhost:5000/bookings`,{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json'
       },
       body:JSON.stringify(bookingData)
     })
+    .then(res=>res.json())
     .then(data=>{
-     
+      console.log(data)
+     if(data.acknowledged){
        toast.success("Booking Success");
     setModalInfo(null)
+    refetch()
+     }
+     
     })
     .catch(e=>console.log(e))
    }

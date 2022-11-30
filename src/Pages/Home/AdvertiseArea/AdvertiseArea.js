@@ -19,13 +19,13 @@ const AdvertiseArea = () => {
       return data;
     },
   });
-  console.log(adsModalInfo)
+
   if(isLoading){
     return <Spinner></Spinner>
   }
   return (
     <div className="mt-10">
-      { RunAds.length > 0 &&
+      { RunAds.length > 0 && 
         <div className="my-10  container mx-auto">
         <h1 className=" font-semibold text-3xl">
           Our Advertisement

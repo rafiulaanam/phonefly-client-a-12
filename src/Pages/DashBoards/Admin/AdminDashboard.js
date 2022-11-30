@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from 'axios'
 
 const AdminDashboard = () => {
+  const [repo, setRepo] = useState(0)
+  const [seller, setSeller] = useState(0)
+  const [buyer, setBuyer] = useState(0)
+
+
+
+
+  axios.get('http://localhost:5000/users?role=Buyer')
+  .then(res=>{
+    // console.log(res);
+    setBuyer( res.data)
+  })
+  // .catch(e=>console.log(e))
+  axios.get('http://localhost:5000/users?role=Seller')
+  .then(res=>{
+    // console.log(res);
+    setSeller( res.data)
+  })
+  // .catch(e=>console.log(e))
+  axios.get('http://localhost:5000/reports')
+  .then(res=>{
+    // console.log(res);
+    setRepo( res.data)
+  })
+  // .catch(e=>console.log(e))
+
   return (
     <div>
       <div className="stats shadow lg:m-10">
@@ -20,8 +47,8 @@ const AdminDashboard = () => {
               ></path>
             </svg>
           </div>
-          <div className="stat-title">New Users</div>
-          <div className="stat-value">31K</div>
+          <div className="stat-title">New Buyer</div>
+          <div className="stat-value">{buyer.length}</div>
           <div className="stat-desc">Jan 1st - Feb 1st</div>
         </div>
 
@@ -42,7 +69,7 @@ const AdminDashboard = () => {
             </svg>
           </div>
           <div className="stat-title">New Sellers</div>
-          <div className="stat-value">4,200</div>
+          <div className="stat-value">{seller.length}</div>
           <div className="stat-desc">↗︎ 400 (22%)</div>
         </div>
 
@@ -63,7 +90,7 @@ const AdminDashboard = () => {
             </svg>
           </div>
           <div className="stat-title">New Registers</div>
-          <div className="stat-value">1,200</div>
+          <div className="stat-value">{repo.length}</div>
           <div className="stat-desc">↘︎ 90 (14%)</div>
         </div>
       </div>
