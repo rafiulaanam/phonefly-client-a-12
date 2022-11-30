@@ -6,7 +6,7 @@ const EditDetailsModal = ({ modalInfo, setMyProducts, refetch }) => {
   const { _id, name, description, sale_price, price, location, img, phone } =
     modalInfo;
   const { register, handleSubmit } = useForm();
-  const [status, setStatus] =useState()
+  const [status, setStatus] = useState();
 
   const handleUpdate = (data) => {
     const productUpdate = {
@@ -14,16 +14,19 @@ const EditDetailsModal = ({ modalInfo, setMyProducts, refetch }) => {
       sale_price: data.sale_price,
       location: data.location,
       phone: data.phone,
-      status: data.status === true ? 'Sold Out' :'Available'
+      status: data.status === true ? "Sold Out" : "Available",
     };
-console.log(data.status)
-    fetch(`http://localhost:5000/my-products/${_id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productUpdate),
-    })
+    console.log(data.status);
+    fetch(
+      `https://phonefly-server-a-12-rafiulaanam.vercel.app/my-products/${_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productUpdate),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -35,12 +38,15 @@ console.log(data.status)
       });
   };
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/my-products/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://phonefly-server-a-12-rafiulaanam.vercel.app/my-products/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((del) => {
         console.log(del);
@@ -58,14 +64,13 @@ console.log(data.status)
         }
       });
   };
-  const handleStatus=(event)=>{
-    const check = event.target.checked 
-    if(check){
-  
-     return setStatus(true)
+  const handleStatus = (event) => {
+    const check = event.target.checked;
+    if (check) {
+      return setStatus(true);
     }
-    return setStatus(false)
-  }
+    return setStatus(false);
+  };
 
   return (
     <div>
@@ -89,18 +94,22 @@ console.log(data.status)
             <del>{price}</del>
           </p>
           <p className="card-text py-4">Meeting location: {location}</p>
-        
+
           <form onSubmit={handleSubmit(handleUpdate)}>
             <div className="form-control">
-            
-               <form onChange={handleStatus} className="form-control mr-8">
-          <label className="label cursor-pointer">
-            <span className="label-text text-base">{status === true ? 'Sold Out': 'Available'}</span>
-            <input
-             {...register("status")}
-            type="checkbox" name="status" className="toggle toggle-sm ml-2" />
-          </label>
-        </form>
+              <form onChange={handleStatus} className="form-control mr-8">
+                <label className="label cursor-pointer">
+                  <span className="label-text text-base">
+                    {status === true ? "Sold Out" : "Available"}
+                  </span>
+                  <input
+                    {...register("status")}
+                    type="checkbox"
+                    name="status"
+                    className="toggle toggle-sm ml-2"
+                  />
+                </label>
+              </form>
             </div>
             <div className="form-control">
               <label className="label">

@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement: <Error></Error>, 
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -59,7 +59,9 @@ export const router = createBrowserRouter([
         path: "/all-phones/:category",
         element: <SingleCategory></SingleCategory>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/all-phones/${params.category}`),
+          fetch(
+            `https://phonefly-server-a-12-rafiulaanam.vercel.app/all-phones/${params.category}`
+          ),
       },
     ],
   },
@@ -160,7 +162,7 @@ export const router = createBrowserRouter([
           </BuyerRoute>
         ),
       },
-      
+
       {
         path: "/profile",
         element: <Profile></Profile>,

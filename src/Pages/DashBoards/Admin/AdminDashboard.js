@@ -9,19 +9,19 @@ const AdminDashboard = () => {
 
 
 
-  axios.get('http://localhost:5000/users?role=Buyer')
+  axios.get('https://phonefly-server-a-12-rafiulaanam.vercel.app/users?role=Buyer')
   .then(res=>{
     // console.log(res);
     setBuyer( res.data)
   })
   // .catch(e=>console.log(e))
-  axios.get('http://localhost:5000/users?role=Seller')
+  axios.get('https://phonefly-server-a-12-rafiulaanam.vercel.app/users?role=Seller')
   .then(res=>{
     // console.log(res);
     setSeller( res.data)
   })
   // .catch(e=>console.log(e))
-  axios.get('http://localhost:5000/reports')
+  axios.get('https://phonefly-server-a-12-rafiulaanam.vercel.app/reports')
   .then(res=>{
     // console.log(res);
     setRepo( res.data)

@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import axios from "axios";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 const SellerDashboard = () => {
+  const [seller, setSeller] = useState(0);
+  const { user } = useContext(AuthContext);
+
+  axios
+    .get(
+      `https://phonefly-server-a-12-rafiulaanam.vercel.app/my-products?email=${user?.email}`
+    )
+    .then((res) => {
+      // console.log(res);
+      setSeller(res.data);
+    });
   return (
     <div>
-      Seller
       <div className="stats shadow lg:m-10">
         <div className="stat">
           <div className="stat-figure text-secondary">
@@ -21,8 +33,8 @@ const SellerDashboard = () => {
               ></path>
             </svg>
           </div>
-          <div className="stat-title">New Users</div>
-          <div className="stat-value">31K</div>
+          <div className="stat-title">My Products</div>
+          <div className="stat-value">{seller.length}</div>
           <div className="stat-desc">Jan 1st - Feb 1st</div>
         </div>
 

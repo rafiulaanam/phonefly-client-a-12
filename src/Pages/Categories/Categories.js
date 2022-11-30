@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import CategoryBar from "./CategoryBar";
 import { useQuery } from "@tanstack/react-query";
 import Phone from "./Phone";
@@ -6,12 +6,10 @@ import BookingModal from "../../Components/BookingModal/BookingModal";
 import ReportedModal from "../../Components/ReportedModal/ReportedModal";
 
 const Categories = () => {
-
-
   const [modalInfo, setModalInfo] = useState(null);
 
-  const url = `http://localhost:5000/all-phones`;
-  const { data: categories = [] ,refetch} = useQuery({
+  const url = `https://phonefly-server-a-12-rafiulaanam.vercel.app/all-phones`;
+  const { data: categories = [], refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const res = await fetch(url);
@@ -33,22 +31,20 @@ const Categories = () => {
         ))}
       </div>
 
-      {modalInfo && 
-      <BookingModal 
-      modalInfo={modalInfo}
-      setModalInfo={setModalInfo}
-      refetch={refetch}
-      ></BookingModal>}
+      {modalInfo && (
+        <BookingModal
+          modalInfo={modalInfo}
+          setModalInfo={setModalInfo}
+          refetch={refetch}
+        ></BookingModal>
+      )}
 
-
-
-
-{modalInfo &&
-         <ReportedModal
-         setReportModalInfo={setModalInfo}
-      reportModalInfo={modalInfo}
-         ></ReportedModal>
-      }
+      {modalInfo && (
+        <ReportedModal
+          setReportModalInfo={setModalInfo}
+          reportModalInfo={modalInfo}
+        ></ReportedModal>
+      )}
     </div>
   );
 };

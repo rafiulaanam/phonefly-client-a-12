@@ -2,56 +2,60 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
-const AdsBookingModal = ({ adsModalInfo,setAdsModalInfo }) => {
-
-  const {user} = useContext(AuthContext)
-  const { name, description, sale_price, price, location, img, seller_name,
-    identity, } = adsModalInfo;
+const AdsBookingModal = ({ adsModalInfo, setAdsModalInfo }) => {
+  const { user } = useContext(AuthContext);
   const {
-    register,  
+    name,
+    description,
+    sale_price,
+    price,
+    location,
+    img,
+    seller_name,
+    identity,
+  } = adsModalInfo;
+  const {
+    register,
     handleSubmit,
     // formState: { errors },
   } = useForm();
-  const navigate =useNavigate()
-console.log(adsModalInfo)
+  const navigate = useNavigate();
+  console.log(adsModalInfo);
   const handleBook = (data) => {
     console.log(data);
-   if(user){
-    const bookingData={
-      buyer_name:user?.displayName,
-      name,
-      sale_price,
-      email:user?.email,
-      phone:data.phone,
-      location,
-      seller_name,
-      identity,
-      status: 'Booked',
-      payment:'Unpaid',
-      img,
+    if (user) {
+      const bookingData = {
+        buyer_name: user?.displayName,
+        name,
+        sale_price,
+        email: user?.email,
+        phone: data.phone,
+        location,
+        seller_name,
+        identity,
+        status: "Booked",
+        payment: "Unpaid",
+        img,
+      };
+      fetch("https://phonefly-server-a-12-rafiulaanam.vercel.app/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      })
+        .then((data) => {
+          toast.success("Booking Success");
+          setAdsModalInfo(null);
+        })
+        .catch((e) => console.log(e));
+    } else {
+      toast.error("Please Register");
+      setAdsModalInfo(null);
+      navigate("/register");
     }
-    fetch('http://localhost:5000/bookings',{
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body:JSON.stringify(bookingData)
-    })
-    .then(data=>{
-     
-       toast.success("Booking Success");
-       setAdsModalInfo(null)
-    })
-    .catch(e=>console.log(e))
-   }
-   else{
-    toast.error("Please Register");
-    setAdsModalInfo(null)
-    navigate('/register')
-   }
-   
   };
 
   return (
@@ -68,7 +72,7 @@ console.log(adsModalInfo)
           <div className="flex justify-center">
             <img className="w-28" src={img} alt="" />
           </div>
-          <h3 className="font-bold text-lg mt-4">{'name'}</h3>
+          <h3 className="font-bold text-lg mt-4">{"name"}</h3>
           <p className="py-4">{description}</p>
           <p className="card-text">
             Price: $

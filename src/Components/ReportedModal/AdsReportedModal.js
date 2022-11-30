@@ -11,27 +11,27 @@ const AdsReportedModal = ({ adsReportModalInfo, setAdsReportModalInfo }) => {
     handleSubmit,
     // formState: { errors },
   } = useForm();
-console.log(adsReportModalInfo)
+  console.log(adsReportModalInfo);
   const handleAdsReport = (data) => {
     console.log(data);
     if (user) {
-     
-      fetch(`http://localhost:5000/reports/${_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        
-      })
+      fetch(
+        `https://phonefly-server-a-12-rafiulaanam.vercel.app/reports/${_id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((data) => {
           toast.success("Report Success");
-          setAdsReportModalInfo(null)
-             
+          setAdsReportModalInfo(null);
         })
         .catch((e) => console.log(e));
     } else {
       toast.error("Please Register");
-      setAdsReportModalInfo(null)
+      setAdsReportModalInfo(null);
     }
   };
   return (
@@ -80,7 +80,6 @@ console.log(adsReportModalInfo)
               />
             </div>
           </form>
-         
         </div>
       </div>
     </div>

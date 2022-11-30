@@ -1,12 +1,10 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const ReportedItem = () => {
-
-
-  const url = `http://localhost:5000/reports`;
-  const { data: reports = [] ,refetch} = useQuery({
+  const url = `https://phonefly-server-a-12-rafiulaanam.vercel.app/reports`;
+  const { data: reports = [], refetch } = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
       const res = await fetch(url);
@@ -16,11 +14,11 @@ const ReportedItem = () => {
   });
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/reports/${id}`, {
+    fetch(`https://phonefly-server-a-12-rafiulaanam.vercel.app/reports/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-}
+      },
     })
       .then((res) => res.json())
       .then((del) => {
@@ -46,10 +44,8 @@ const ReportedItem = () => {
             </tr>
           </thead>
           <tbody>
-            {
-              reports.map(report =><tr
-                key={report._id}
-              >
+            {reports.map((report) => (
+              <tr key={report._id}>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
@@ -62,7 +58,9 @@ const ReportedItem = () => {
                     </div>
                     <div>
                       <div className="font-bold">{report.name}</div>
-                      <div className="text-sm opacity-50">{report.location}, Bangladesh</div>
+                      <div className="text-sm opacity-50">
+                        {report.location}, Bangladesh
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -70,20 +68,21 @@ const ReportedItem = () => {
                   {report.email}
                   <br />
                   <span className="badge badge-ghost badge-sm">
-                   {report.role}
+                    {report.role}
                   </span>
                 </td>
                 <td>{report.identity}</td>
+                <th></th>
                 <th>
-                 
-                  
+                  <button
+                    onClick={() => handleDelete(report._id)}
+                    className="btn btn-error px-8 btn-sm"
+                  >
+                    Delete
+                  </button>
                 </th>
-                <th>
-                  <button onClick={()=>handleDelete(report._id)} className="btn btn-error px-8 btn-sm">Delete</button>
-                </th>
-              </tr> )
-               
-            }
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

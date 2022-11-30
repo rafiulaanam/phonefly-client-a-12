@@ -3,7 +3,7 @@ import Blog from "./Blog";
 import { useQuery } from "@tanstack/react-query";
 
 const Blogs = () => {
-  const url = `http://localhost:5000/blogs`;
+  const url = `https://phonefly-server-a-12-rafiulaanam.vercel.app/blogs`;
 
   const { data: blogs = [] } = useQuery({
     queryKey: ["blogs"],
@@ -18,13 +18,9 @@ const Blogs = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs.map((blog) => (
-          <Blog
-          key={blog._id}
-          blog={blog}
-          ></Blog>
+          <Blog key={blog._id} blog={blog}></Blog>
         ))}
       </div>
-
     </div>
   );
 };

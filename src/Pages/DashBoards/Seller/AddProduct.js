@@ -35,7 +35,7 @@ const AddProduct = () => {
       const posted_time = dateFormat(now, "fullDate");
       const products = {
         seller_name: user.displayName,
-        email:user.email,
+        email: user.email,
         identity: "Not Verified",
         name: data.name,
         price: data.price,
@@ -48,11 +48,11 @@ const AddProduct = () => {
         category: data.category,
         posted_time,
         img,
-        status:'Available',
-        ads:'NoAds'
+        status: "Available",
+        ads: "NoAds",
       };
 
-      fetch(`http://localhost:5000/all-phones`, {
+      fetch(`https://phonefly-server-a-12-rafiulaanam.vercel.app/all-phones`, {
         method: "POST",
         headers: {
           "content-Type": "application/json",
@@ -60,7 +60,6 @@ const AddProduct = () => {
         body: JSON.stringify(products),
       })
         .then(() => {
-         
           toast.success("Product Added Successfully");
           navigate("/seller/dashboard/my-products");
         })

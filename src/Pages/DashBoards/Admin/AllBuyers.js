@@ -1,12 +1,10 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const AllBuyers = () => {
-
-
-  const url = `http://localhost:5000/users?role=Buyer`;
-  const { data: buyers = [] ,refetch} = useQuery({
+  const url = `https://phonefly-server-a-12-rafiulaanam.vercel.app/users?role=Buyer`;
+  const { data: buyers = [], refetch } = useQuery({
     queryKey: ["buyers"],
     queryFn: async () => {
       const res = await fetch(url);
@@ -16,11 +14,11 @@ const AllBuyers = () => {
   });
 
   const handleUpdate = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://phonefly-server-a-12-rafiulaanam.vercel.app/users/${id}`, {
       method: "PUT",
       headers: {
-              "Content-Type": "application/json",
-      }
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -32,11 +30,11 @@ const AllBuyers = () => {
       });
   };
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://phonefly-server-a-12-rafiulaanam.vercel.app/users/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-}
+      },
     })
       .then((res) => res.json())
       .then((del) => {
@@ -62,10 +60,8 @@ const AllBuyers = () => {
             </tr>
           </thead>
           <tbody>
-            {
-              buyers.map(buyer =><tr
-                key={buyer._id}
-              >
+            {buyers.map((buyer) => (
+              <tr key={buyer._id}>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
@@ -78,7 +74,9 @@ const AllBuyers = () => {
                     </div>
                     <div>
                       <div className="font-bold">{buyer.name}</div>
-                      <div className="text-sm opacity-50">{buyer.location}, Bangladesh</div>
+                      <div className="text-sm opacity-50">
+                        {buyer.location}, Bangladesh
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -86,25 +84,37 @@ const AllBuyers = () => {
                   {buyer.email}
                   <br />
                   <span className="badge badge-ghost badge-sm">
-                   {buyer.role}
+                    {buyer.role}
                   </span>
                 </td>
                 <td>{buyer.identity}</td>
                 <th>
-                  {
-                    buyer.identity === 'Verified' ?
-                    <button onClick={()=>handleUpdate(buyer._id)} className=" btn-disabled  btn-sm text-white border-none px-8 btn bg-gradient-to-r from-[#442f4e] to-[#632a26]">Verified</button>
-                    :
-                    <button onClick={()=>handleUpdate(buyer._id)} className="  btn-sm text-white border-none px-8 btn bg-gradient-to-r from-[#874da2] to-[#c43a30]">Make Verified</button>
-                  }
-                  
+                  {buyer.identity === "Verified" ? (
+                    <button
+                      onClick={() => handleUpdate(buyer._id)}
+                      className=" btn-disabled  btn-sm text-white border-none px-8 btn bg-gradient-to-r from-[#442f4e] to-[#632a26]"
+                    >
+                      Verified
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleUpdate(buyer._id)}
+                      className="  btn-sm text-white border-none px-8 btn bg-gradient-to-r from-[#874da2] to-[#c43a30]"
+                    >
+                      Make Verified
+                    </button>
+                  )}
                 </th>
                 <th>
-                  <button onClick={()=>handleDelete(buyer._id)} className="btn btn-error px-8 btn-sm">Delete</button>
+                  <button
+                    onClick={() => handleDelete(buyer._id)}
+                    className="btn btn-error px-8 btn-sm"
+                  >
+                    Delete
+                  </button>
                 </th>
-              </tr> )
-               
-            }
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

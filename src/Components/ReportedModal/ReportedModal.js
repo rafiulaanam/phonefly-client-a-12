@@ -15,23 +15,23 @@ const ReportedModal = ({ reportModalInfo, setReportModalInfo }) => {
   const handleReport = (data) => {
     console.log(data);
     if (user) {
-     
-      fetch(`http://localhost:5000/reports/${_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        
-      })
+      fetch(
+        `https://phonefly-server-a-12-rafiulaanam.vercel.app/reports/${_id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((data) => {
           toast.success("Report Success");
-          setReportModalInfo(null)
-             
+          setReportModalInfo(null);
         })
         .catch((e) => console.log(e));
     } else {
       toast.error("Please Register");
-      setReportModalInfo(null)
+      setReportModalInfo(null);
     }
   };
   return (
