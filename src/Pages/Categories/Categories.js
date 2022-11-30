@@ -3,6 +3,7 @@ import CategoryBar from "./CategoryBar";
 import { useQuery } from "@tanstack/react-query";
 import Phone from "./Phone";
 import BookingModal from "../../Components/BookingModal/BookingModal";
+import ReportedModal from "../../Components/ReportedModal/ReportedModal";
 
 const Categories = () => {
 
@@ -37,6 +38,16 @@ const Categories = () => {
       modalInfo={modalInfo}
       setModalInfo={setModalInfo}
       ></BookingModal>}
+
+
+
+
+{modalInfo &&
+         <ReportedModal
+         setReportModalInfo={setModalInfo}
+      reportModalInfo={setModalInfo}
+         ></ReportedModal>
+      }
     </div>
   );
 };

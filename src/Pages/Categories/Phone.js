@@ -1,6 +1,6 @@
 import React from "react";
 import { FcOk } from "react-icons/fc";
-import { BsBookmarkCheck,BsBookmarkCheckFill } from "react-icons/bs";
+import { BsBookmarkCheck } from "react-icons/bs";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const Phone = ({ category, setModalInfo }) => {
@@ -50,7 +50,11 @@ const Phone = ({ category, setModalInfo }) => {
           </p>
           <div className="card-actions justify-end items-center">
           <button className="text-4xl mr-3"><BsBookmarkCheck/></button>
-            <label onClick={()=>setModalInfo(category)}  htmlFor="booking-modal" className="text-white border-none px-8 btn ">Report</label>
+
+          
+            <label onClick={()=>setModalInfo(category)}  htmlFor="report-modal" className="text-white border-none px-8 btn ">Report</label>
+
+
             <label onClick={()=>setModalInfo(category)}  htmlFor="booking-modal" className="text-white border-none px-8 btn bg-gradient-to-r from-[#874da2] to-[#c43a30]">Book Now</label>
           </div>
         </div>

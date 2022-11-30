@@ -26,7 +26,7 @@ const AllSellers = () => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount > 0) {
-          toast.success("Make Admin Successfully");
+          toast.success("Make Verified Successfully");
           refetch();
         }
       });
