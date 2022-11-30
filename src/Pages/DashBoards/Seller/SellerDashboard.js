@@ -6,7 +6,7 @@ const SellerDashboard = () => {
   const [seller, setSeller] = useState(0);
   const { user } = useContext(AuthContext);
 
-  axios
+  axios //axios added
     .get(
       `https://phonefly-server-a-12-rafiulaanam.vercel.app/my-products?email=${user?.email}`
     )
